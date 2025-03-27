@@ -2,7 +2,8 @@
 #include <memory>
 
 /*
-* Singleton with unique pointer
+* Singleton with local static unique pointer
+* Dynamic memory allocation
 * Lazy initialization
 * Singleton is created in the first call of getInstance() and destroyed automatically after main() call
 * Thread-safety not guaranteed

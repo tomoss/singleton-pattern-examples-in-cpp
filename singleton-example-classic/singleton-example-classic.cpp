@@ -1,7 +1,8 @@
 #include <iostream>
 
 /*
-* Example with instance as static member variable
+* Example with static member variable
+* Static memory allocation
 * Eager initialization
 * Singleton is created before main() and destroyed after main() call
 * Thread-safety not guaranteed

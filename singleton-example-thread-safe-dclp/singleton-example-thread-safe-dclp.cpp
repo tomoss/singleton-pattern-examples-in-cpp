@@ -3,7 +3,8 @@
 #include <future>
 
 /*
-* Singleton with Double-Checked Locking
+* Singleton with Double-Checked Locking - static pointer member variable
+* Dynamic memory allocation
 * Lazy initialization
 * Singleton is created only after first call of getInstance() and destroyed by calling delInstance()
 * DCLP is designed to add efficient thread-safety to initialization of a shared resource (such as a Singleton), but it has a problem: it’s not reliable
@@ -56,22 +57,24 @@ std::mutex Singleton::mtx;  /* Defined static mutex outside class. */
 
 int main()
 {
+    std::cout << "--- main start ---" << std::endl;
+
     Singleton::getInstance()->func();
 
-    auto async1 = std::async(std::launch::async, []()
-    {
+    auto async1 = std::async(std::launch::async, []() {
             Singleton::getInstance()->func();
     });
 
-    auto async2 = std::async(std::launch::async, []()
-        {
+    auto async2 = std::async(std::launch::async, []() {
             Singleton::getInstance()->func();
-        });
+    });
 
     async1.wait();
     async2.wait();
 
     Singleton::delInstance();
+
+    std::cout << "--- main end ---" << std::endl;
 }
 
 
